@@ -46,8 +46,10 @@ services:
       - OVERWRITEPROTOCOL=https
       - NEXTCLOUD_TRUSTED_DOMAINS=nextcloud
       - OVERWRITEHOST=nextcloud
+      - REDIS_HOST=redis
     volumes:
       - nextcloud_data:/var/www/html
+      - ./config.php:/var/www/html/config/config.php
     networks:
       - mynet
     restart: always
@@ -64,6 +66,28 @@ services:
     networks:
       - mynet
     restart: always
+  
+  redis:
+    image: redis:alpine
+    container_name: redis
+    networks:
+      - mynet
+    restart: always
+    ports:
+      - "6379:6379"
+    depends_on:
+      - nginx
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    networks:
+      - mynet
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    depends_on:
+      - nginx
 
 networks:
   mynet:

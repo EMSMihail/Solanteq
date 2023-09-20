@@ -1,7 +1,13 @@
 <?php
 $CONFIG = array (
-  'htaccess.RewriteBase' => '/',
   'memcache.local' => '\\OC\\Memcache\\APCu',
+  'filelocking.enabled' => true,
+  'memcache.locking' => '\OC\Memcache\Redis',
+  'redis' => array(
+     'host' => '/var/run/redis/redis.sock',
+     'port' => 6379,
+     'timeout' => 0.0,
+      ),
   'apps_paths' => 
   array (
     0 => 
@@ -34,7 +40,15 @@ $CONFIG = array (
   'installed' => true,
   'overwritehost' => 'nextcloud',
   'overwrite.cli.url' => 'nextcloud',
-  'dbtableprefix' => '',
-  'dbuser' => 'solanteq_user',
+  'dbtableprefix' => 'oc_',
+  'dbuser' => 'oc_solanteq_user',
   'installed' => true,
+  'config_is_read_only' => true,
+  'default_phone_region' => 'RU',
+  'mail_from_address' => 'no-reply',
+  'mail_smtpmode' => 'smtp',
+  'mail_sendmailmode' => 'smtp',
+  'mail_domain' => 'example.com',
+  'mail_smtphost' => 'mailhog',
+  'mail_smtpport' => '1025',
 );
